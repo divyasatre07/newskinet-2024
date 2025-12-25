@@ -1,0 +1,39 @@
+
+@use '@angular/material' as mat;
+
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+@import "tailwindcss";
+
+
+:root {
+  @include mat.button-overrides((
+    filled-container-shape: 10px,
+    outlined-container-shape: 10px
+  ));
+    @include mat.badge-overrides((
+    background-color: blue
+    
+  ));
+}
+
+
+.rect-btn {
+  border-radius: 0 !important;
+  padding: 6px 20px;
+  min-width: auto;
+}
+
+.cart-btn {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  padding: 0 !important;
+  position: relative !important;
+}
+
+.cart-btn mat-icon {
+  font-size: 22px !important;
+}
+

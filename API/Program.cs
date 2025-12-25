@@ -1,8 +1,10 @@
 
 
+using API.Middleware;
 using Core.interfaces;
 using Core.Interfaces;
 using Infrastructure.Data; // Make sure you include your StoreContext
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
@@ -20,30 +22,45 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 });
 builder.Services . AddScoped<IProductRepository, ProductRepository>();
 builder.Services. AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:4200", "https://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware order MATTERS ⬇️⬇️⬇️
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");   // ✅ MUST be before MapControllers
+
+app.UseMiddleware<Exceptionmiddleware>();
+
 app.MapControllers();
+
 try
 {
-    using  var scope =app.Services.CreateScope();
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<StoreContext>();
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<StoreContext>();
     await context.Database.MigrateAsync();
     await StoreContextSeed.SeedAsync(context);
-
 }
 catch (Exception ex)
 {
     Console.WriteLine(ex.Message);
-    throw;
 }
 
 app.Run();

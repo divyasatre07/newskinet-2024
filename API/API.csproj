@@ -20,4 +20,10 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\" />
+    <Folder Include="Errors\" />
+    <Folder Include="Middleware\" />
+  </ItemGroup>
+
 </Project>
