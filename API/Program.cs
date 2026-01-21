@@ -45,7 +45,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("CorsPolicy");   // ✅ MUST be before MapControllers
+app.UseStaticFiles();
+
+app.UseCors("CorsPolicy"); 
 
 app.UseMiddleware<Exceptionmiddleware>();
 

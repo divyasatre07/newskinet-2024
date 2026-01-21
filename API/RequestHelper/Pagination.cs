@@ -7,4 +7,6 @@
 		public int Count { get; set; } = Count;
 		public IReadOnlyList<T> Data { get; set; } = data;
 	}
+
 }
+

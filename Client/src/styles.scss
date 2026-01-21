@@ -36,4 +36,12 @@
 .cart-btn mat-icon {
   font-size: 22px !important;
 }
+.add-to-cart-btn mat-icon {
+  margin-right: 6px;
+  color: black;
+}
 
+.match-input-height{
+  height:var(--mat-form-field-container-height) !important;
+  
+}

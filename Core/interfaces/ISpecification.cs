@@ -14,6 +14,7 @@ public interface ISpecification<T>
 	int Skip { get; }
 	bool IsPagingEnabled { get; }
 	IQueryable<T> ApplyCriateria(IQueryable<T> query);
+	ISpecification<T> CountSpecification();
 }
 
 

@@ -18,6 +18,7 @@ public class ProductsController(IGenericRepository<Product> repo) : BaseAPIContr
 
 	[HttpGet]
 	public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts([FromQuery]ProductSpecParams specParams)
+
 {
 	var spec = new ProductSpecification(specParams);
 

@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace API.Middleware;
 
-public class Exceptionmiddleware(IHostEnvironment env,RequestDelegate next)
+public class Exceptionmiddleware(IHostEnvironment env, RequestDelegate next)
 {
 	public async Task InvokeAsync(HttpContext context)
 	{
@@ -14,12 +14,12 @@ public class Exceptionmiddleware(IHostEnvironment env,RequestDelegate next)
 		{
 			await next(context);
 		}
-		catch (Exception  ex)
+		catch (Exception ex)
 		{
-			await HandleExceptionAsync(context, ex,env);
+			await HandleExceptionAsync(context, ex, env);
 		}
 	}
-
+	
 	private static Task HandleExceptionAsync(HttpContext context, Exception ex, IHostEnvironment env)
 	{
 		context.Response.ContentType = "application/json";
@@ -30,5 +30,5 @@ public class Exceptionmiddleware(IHostEnvironment env,RequestDelegate next)
 		var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 		var json = JsonSerializer.Serialize(response, options);
 		return context.Response.WriteAsync(json);
-			}
+	}
 }

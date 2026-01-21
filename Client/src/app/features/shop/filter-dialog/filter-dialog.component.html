@@ -1,0 +1,68 @@
+<div>
+  <!-- Title -->
+  <h3 class="text-3xl text-center pt-6 mb-3 text-black-600 font-semibold">
+    Filters
+  </h3>
+
+  <mat-divider></mat-divider>
+
+  <!-- Content -->
+  <div class="flex p-4 gap-6">
+    
+    <!-- Brands -->
+    <div class="w-1/2">
+      <h4 class="font-semibold text-xl text-blue-600 mb-2">
+        Brands
+      </h4>
+
+      <mat-selection-list
+        [(ngModel)]="selectedBrands"
+        [multiple]="true"
+        class="text-blue-500"
+      >
+        @for (brand of shopService.brands; track $index) {
+          <mat-list-option
+            [value]="brand"
+            class="text-blue-500"
+          >
+            {{ brand }}
+          </mat-list-option>
+        }
+      </mat-selection-list>
+    </div>
+
+    <!-- Types -->
+    <div class="w-1/2">
+      <h4 class="font-semibold text-xl text-blue-600 mb-2">
+        Types
+      </h4>
+
+      <mat-selection-list
+        [(ngModel)]="selectedTypes"
+        [multiple]="true"
+        class="text-blue-500"
+      >
+        @for (type of shopService.types; track $index) {
+          <mat-list-option
+            [value]="type"
+            class="text-blue-500"
+          >
+            {{ type }}
+          </mat-list-option>
+        }
+      </mat-selection-list>
+    </div>
+
+  </div>
+
+  <!-- Actions -->
+  <div class="flex justify-end p-4">
+    <button
+      mat-flat-button
+      class="bg-blue-600 hover:bg-blue-700 text-black px-6"
+      (click)="applyFilters()"
+    >
+      Apply
+    </button>
+  </div>
+</div>

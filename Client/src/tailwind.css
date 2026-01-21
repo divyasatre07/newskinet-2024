@@ -2,3 +2,6 @@
 .container{
     @apply mx-auto max-w-screen-2xl 
 }
+.text-primary{
+    @apply text-blue-500
+}

@@ -51,6 +51,11 @@ namespace Core.Specification
 			}
 			return query;
 		}
+
+		public ISpecification<T> CountSpecification()
+		{
+			throw new NotImplementedException();
+		}
 	}
 	// SELECT version
 	public class BaseSpecification<T, TResult>
