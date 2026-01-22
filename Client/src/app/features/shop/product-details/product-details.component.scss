@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+mat-divider {
+  width: 100%;
+}
+
+mat-form-field {
+  margin: 0;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+button[mat-flat-button] {
+  height: 48px;
+}

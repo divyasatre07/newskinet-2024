@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterLink, RouterLinkActive } from "@angular/router";
 
 
 @Component({
@@ -9,8 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     MatIconModule,
     MatBadgeModule,
-    MatButtonModule
-  ],
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive
+],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

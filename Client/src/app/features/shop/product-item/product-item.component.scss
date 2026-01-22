@@ -1,0 +1,10 @@
+.cursor-pointer{
+    transition: transform 0.2s,box-shadow 0.2s;
+}
+
+.cursor-pointer:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 4x 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+
+}

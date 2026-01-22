@@ -12,7 +12,7 @@ import { MatMenu, MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatListModule, MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 import { ShopParams } from '../../shared/models/shopParams';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { pagination } from '../../shared/models/pagination';
 import { FormsModule } from '@angular/forms';
 
@@ -28,7 +28,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatMenuModule,
     MatListModule,
-    MatPaginator,
+    MatPaginatorModule,
     FormsModule
   ],
   templateUrl: './shop.component.html',
@@ -50,6 +50,7 @@ export class ShopComponent implements OnInit {
   shopParams = new ShopParams();
   PageSizeOption = [5, 10, 15, 20]
   ngOnInit() {
+    console.log("shop");
     this.initializeShop();
   }
 
@@ -59,7 +60,7 @@ export class ShopComponent implements OnInit {
     this.getProducts();
   }
   getProducts() {
-    this.shopServices.getProduct(this.shopParams).subscribe({
+    this.shopServices.getProducts(this.shopParams).subscribe({
 
       next: response => this.products = response,
       error: error => console.log(error)
@@ -67,7 +68,8 @@ export class ShopComponent implements OnInit {
   }
 onSearchChange(){
   this.shopParams.pageNumber=1;
-  this.getProducts;
+
+  this.getProducts(); 
 }
 
   handlePageEvent(event: PageEvent) {

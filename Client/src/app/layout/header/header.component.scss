@@ -45,3 +45,9 @@ body {
 .register:hover {
   background-color: #7c3aed1a !important; /* light violet hover */
 }
+ a{
+  &.active{
+    color:#7d00fa;
+    
+  }
+ }
