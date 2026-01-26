@@ -5,3 +5,6 @@
 .text-primary{
     @apply text-blue-500
 }
+.active-link {
+  @apply font-bold text-purple-600;
+}

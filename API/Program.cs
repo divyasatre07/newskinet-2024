@@ -49,7 +49,7 @@ app.UseStaticFiles();
 
 app.UseCors("CorsPolicy"); 
 
-app.UseMiddleware<Exceptionmiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 
