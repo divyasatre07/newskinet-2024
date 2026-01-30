@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Controllers & Swagger
@@ -68,6 +69,7 @@ app.UseStaticFiles();
 app.UseCors("CorsPolicy");
 app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
+
 
 // DB Migration & Seed
 try

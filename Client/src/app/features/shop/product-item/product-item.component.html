@@ -15,8 +15,9 @@
       </p>
     </mat-card-content>
 
-    <mat-card-actions>
-      <button mat-raised-button color="primary" class="w-full">
+    <mat-card-actions (click)="$event.stopPropagation()">
+      <button mat-raised-button color="primary" class="w-full" (click)="cartService.addItemToCart(product)">
+     
         <mat-icon>add_shopping_cart</mat-icon>
         Add to Cart
       </button>

@@ -19,6 +19,8 @@
           {{ product.name }}
         </h1>
 
+        <p> you have {{quantityInCart}} of this item in your cart</p>
+
         <p class="mt-4 text-3xl font-bold text-gray-900">
           {{ product.price | currency }}
         </p>
@@ -26,13 +28,14 @@
        <div class="flex items-center gap-4 mt-6">
 
   <!-- ADD TO CART -->
-  <button
+  <button [disabled]="quantity === quantityInCart"
+ (click)="updateCart()" 
     mat-flat-button
     color="primary"
     class="h-12 px-6 flex items-center gap-2 rounded-lg"
   >
     <mat-icon>shopping_cart</mat-icon>
-    Add to cart
+{{getButtonText()}}
   </button>
 
   <!-- QUANTITY -->
@@ -47,6 +50,7 @@
       min="1"
       value="1"
       class="h-12"
+      [(ngModel)]="quantity"
     />
   </mat-form-field>
 

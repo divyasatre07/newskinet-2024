@@ -24,18 +24,19 @@
 
 
     <div class="flex items-center gap-3">
+      <a routerLink="/cart" routerLinkActive="active">
 
       <!-- Shopping Cart with Badge -->
      <button
   mat-icon-button
-  matBadge="5"
+  matBadge="{{cartService.itemCount()}}"
  
   matBadgeSize="medium"
   class="cart-btn"
 >
   <mat-icon>shopping_cart</mat-icon>
 </button>
-
+</a>
 
 <button mat-stroked-button class="login">Login</button>
 
