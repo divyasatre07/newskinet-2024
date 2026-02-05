@@ -19,6 +19,7 @@ namespace API.Controllers
 		{
 			var cart = await _cartService.GetCartAsync(id);
 			return Ok(cart ?? new ShoppingCart { Id = id });
+
 		}
 
 		// POST: api/cart

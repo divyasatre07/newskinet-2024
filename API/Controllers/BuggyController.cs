@@ -1,46 +1,75 @@
 using API.DTO;
 using Core.Entities;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BuggyController : ControllerBase
-    {
-        [HttpGet("unauthorized")]
-        public IActionResult GetUnauthorized()
-        {
-            return Unauthorized();
+	[Route("api/[controller]")]
+	[ApiController]
+	public class BuggyController : ControllerBase
+	{
+		// -----------------------
+		// Public endpoints
+		// -----------------------
 
+		[HttpGet("unauthorized")]
+		public IActionResult GetUnauthorized()
+		{
+			// Explicitly returns 401
+			return Unauthorized(new { message = "You are not authorized to access this resource." });
 		}
+
 		[HttpGet("badrequest")]
 		public IActionResult GetBadRequest()
 		{
-			return BadRequest("not a good request");
-
+			return BadRequest(new { message = "This is not a valid request." });
 		}
+
 		[HttpGet("notfound")]
 		public IActionResult GetNotFound()
 		{
-			return NotFound();
-
+			return NotFound(new { message = "Resource could not be found." });
 		}
+
 		[HttpGet("internalerror")]
 		public IActionResult GetInternalError()
 		{
-			throw new Exception("This is the test exception");
+			throw new Exception("This is a test exception.");
 		}
-
 
 		[HttpPost("validationerror")]
 		public IActionResult GetValidationError(CreateProductDto product)
 		{
-			return Ok();
+			if (product == null || string.IsNullOrEmpty(product.Name))
+			{
+				// Return 400 if validation fails
+				return BadRequest(new { message = "Product validation failed." });
+			}
 
+			return Ok(product);
 		}
 
+		// -----------------------
+		// Protected endpoint
+		// -----------------------
 
+		[Authorize]
+		[HttpGet("secret")]
+		public IActionResult GetSecret()
+		{
+			// This will only be called if the user is authenticated
+			if (!User.Identity?.IsAuthenticated ?? true)
+				return Unauthorized();
 
+			var name = User.FindFirst(ClaimTypes.Name)?.Value ?? "Unknown";
+			var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0";
+
+			return Ok(new
+			{
+				message = $"Hello {name} with the id of {id}"
+			});
+		}
 	}
 }
